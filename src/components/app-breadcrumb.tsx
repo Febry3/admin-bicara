@@ -11,9 +11,14 @@ export default function AppBreadcrumb() {
             <BreadcrumbList>
                 {paths.map((path, index) => (
                     <React.Fragment key={index}>
-                        <BreadcrumbItem key={index}>
-                            <BreadcrumbLink href={"/" + path}>{path === '' && index === 1 ? "dashboard" : path}</BreadcrumbLink>
-                        </BreadcrumbItem><BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <BreadcrumbLink href={"/" + path}>
+                                <p className="text-md font-medium text-black ">
+                                    {path === '' && index === 1 ? "Dashboard" : path}
+                                </p>
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
                     </React.Fragment>
                 ))}
             </BreadcrumbList>

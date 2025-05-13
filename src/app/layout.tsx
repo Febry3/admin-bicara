@@ -6,7 +6,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import AppBreadcrumb from "@/components/app-breadcrumb";
 
 const poppinSans = Poppins({
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
   display: 'swap'
 });
