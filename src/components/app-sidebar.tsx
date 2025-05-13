@@ -1,9 +1,11 @@
 "use client"
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Home, Newspaper, Search, UserRoundCog, Users } from "lucide-react"
+import { usePathname } from "next/navigation"
 
 import {
     Sidebar,
     SidebarContent,
+    SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
     SidebarGroupLabel,
@@ -14,60 +16,71 @@ import {
     useSidebar,
 } from "@/components/ui/sidebar"
 import Image from "next/image"
+import Link from "next/link"
 
 const menu = [
     {
-        title: "Home",
-        url: "#",
+        title: "Dashboard",
+        url: "/",
         icon: Home,
     },
     {
-        title: "Inbox",
-        url: "#",
-        icon: Inbox,
+        title: "Article",
+        url: "/article",
+        icon: Newspaper,
     },
     {
-        title: "Calendar",
-        url: "#",
-        icon: Calendar,
+        title: "Counselor",
+        url: "/counselor",
+        icon: Users,
     },
     {
-        title: "Search",
-        url: "#",
+        title: "Report",
+        url: "/report",
         icon: Search,
     },
     {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
+        title: "Admin",
+        url: "/admin",
+        icon: UserRoundCog,
     },
 ]
 
 export function AppSidebar() {
     const { state } = useSidebar();
+    const pathname = usePathname();
     return (
         <Sidebar className={state === "expanded" ? "p-4" : ""} collapsible="icon">
             <SidebarHeader>
-                <Image src={"/admin-bicara.png"} alt="Logo" width={140} height={60} />
+                <Image src={"/admin-bicara.png"} alt="Logo" width={120} height={60} />
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Menu</SidebarGroupLabel>
+                    <SidebarGroupLabel>Navigation</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {menu.map((item) => (
-                                <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                <SidebarMenuItem key={item.title} >
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={
+                                            pathname === item.url ||
+                                            (item.url !== "/" && pathname.startsWith(item.url))
+                                        }
+                                    >
+                                        <Link href={item.url}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
+                <SidebarFooter>
+                    <h1>gooter</h1>
+                </SidebarFooter>
             </SidebarContent>
         </Sidebar>
     )

@@ -3,9 +3,10 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import AppBreadcrumb from "@/components/app-breadcrumb";
 
 const poppinSans = Poppins({
-  weight: ['500'],
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
   display: 'swap'
 });
@@ -27,9 +28,14 @@ export default function RootLayout({
       >
         <SidebarProvider>
           <AppSidebar />
-          <main>
-            <SidebarTrigger />
-            {children}
+          <main className="w-full p-5">
+            <div className="flex flex-row items-center gap-4 justify-between">
+              <SidebarTrigger />
+              <AppBreadcrumb />
+            </div>
+            <div className="pt-3 w-full">
+              {children}
+            </div>
           </main>
         </SidebarProvider>
       </body>
