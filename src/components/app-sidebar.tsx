@@ -35,8 +35,8 @@ const menu = [
         icon: Users,
     },
     {
-        title: "Report",
-        url: "/report",
+        title: "Transaction",
+        url: "/transaction",
         icon: Search,
     },
     {

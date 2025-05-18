@@ -1,17 +1,13 @@
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import Image from "next/image"
-import AppDropdown from "../table-action"
-import ArticleStatusBadge from "../article-status-badge"
 import TableAction from "../table-action"
+import { randomInt } from "crypto"
 
 const counselors = [
     {
@@ -28,7 +24,8 @@ const counselors = [
         remember_token: null,
         created_at: "2024-05-01T10:00:00Z",
         updated_at: "2024-05-01T10:00:00Z",
-        revenue: 100000
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     },
     {
         id: 2,
@@ -44,7 +41,8 @@ const counselors = [
         remember_token: null,
         created_at: "2024-05-01T10:10:00Z",
         updated_at: "2024-05-01T10:10:00Z",
-        revenue: 100000
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     },
     {
         id: 3,
@@ -60,7 +58,8 @@ const counselors = [
         remember_token: null,
         created_at: "2024-05-01T10:20:00Z",
         updated_at: "2024-05-01T10:20:00Z",
-        revenue: 100000
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     },
     {
         id: 4,
@@ -76,7 +75,8 @@ const counselors = [
         remember_token: null,
         created_at: "2024-05-01T10:30:00Z",
         updated_at: "2024-05-01T10:30:00Z",
-        revenue: 100000
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     },
     {
         id: 5,
@@ -92,7 +92,8 @@ const counselors = [
         remember_token: null,
         created_at: "2024-05-01T10:40:00Z",
         updated_at: "2024-05-01T10:40:00Z",
-        revenue: 100000
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     },
     {
         id: 6,
@@ -108,7 +109,8 @@ const counselors = [
         remember_token: null,
         created_at: "2024-05-01T10:50:00Z",
         updated_at: "2024-05-01T10:50:00Z",
-        revenue: 100000
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     },
     {
         id: 7,
@@ -124,7 +126,8 @@ const counselors = [
         remember_token: null,
         created_at: "2024-05-01T11:00:00Z",
         updated_at: "2024-05-01T11:00:00Z",
-        revenue: 100000
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     },
     {
         id: 8,
@@ -140,7 +143,8 @@ const counselors = [
         remember_token: null,
         created_at: "2024-05-01T11:10:00Z",
         updated_at: "2024-05-01T11:10:00Z",
-        revenue: 100000
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     },
     {
         id: 9,
@@ -156,7 +160,8 @@ const counselors = [
         remember_token: null,
         created_at: "2024-05-01T11:20:00Z",
         updated_at: "2024-05-01T11:20:00Z",
-        revenue: 100000
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     },
     {
         id: 10,
@@ -171,8 +176,9 @@ const counselors = [
         birthdate: "1985-12-25",
         remember_token: null,
         created_at: "2024-05-01T11:30:00Z",
-        updated_at: "2024-05-01T11:30:00Z",
-        revenue: 100000
+        updated_at: new Date("2024-05-01"),
+        revenue: randomInt(100000),
+        totalConsulting: randomInt(100),
     }
 ];
 
@@ -187,6 +193,7 @@ export default function CounselorTable() {
                     <TableHead >Gender</TableHead>
                     <TableHead >Role</TableHead>
                     <TableHead >Joined at</TableHead>
+                    <TableHead >Total Consultation</TableHead>
                     <TableHead >Revenue</TableHead>
                     <TableHead ></TableHead>
                 </TableRow>
@@ -200,6 +207,7 @@ export default function CounselorTable() {
                         <TableCell>{counselor.gender}</TableCell>
                         <TableCell>{counselor.role}</TableCell>
                         <TableCell>{counselor.created_at}</TableCell>
+                        <TableCell>{counselor.totalConsulting}</TableCell>
                         <TableCell>{counselor.revenue}</TableCell>
                         <TableCell className="text-center">
                             <TableAction />

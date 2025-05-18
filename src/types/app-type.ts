@@ -7,6 +7,13 @@ interface IDashboardCard {
     icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>
 }
 
+interface IPaymentCard {
+    title: string,
+    amount: number,
+    status: string
+}
+
 export type {
-    IDashboardCard
+    IDashboardCard,
+    IPaymentCard
 }

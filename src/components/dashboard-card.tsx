@@ -1,13 +1,10 @@
 import { IDashboardCard } from "@/types/app-type";
-import { UsersRound } from "lucide-react";
-
-
 
 export default function DashboardCard(data: IDashboardCard) {
     return (
-        <div className="border-1 shadow-sm rounded-sm px-5 py-3 flex h-35 justify-between">
+        <div className="border-1 shadow-sm rounded-sm px-5 py-3 flex h-30 justify-between">
             <div className="flex flex-col justify-between">
-                <p className="text-xl font-[500]">{data.title}</p>
+                <p className="text-md font-[500]">{data.title}</p>
                 <div className="flex flex-col">
                     <p className="text-3xl font-[600]">{data.amount}</p>
                     <p className="text-sm text-[var(--primary-color)]">All time</p>
