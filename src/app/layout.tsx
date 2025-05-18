@@ -28,7 +28,7 @@ export default function RootLayout({
       >
         <SidebarProvider>
           <AppSidebar />
-          <main className="w-full p-5">
+          <main className="w-full py-6 px-8">
             <div className="flex flex-row items-center gap-4 justify-between">
               <SidebarTrigger />
               <AppBreadcrumb />

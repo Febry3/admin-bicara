@@ -26,9 +26,11 @@ const chartData = [
 const chartConfig = {
     gender: {
         label: "Kelamin",
+        color: "var(--primary-color)",
     },
     total: {
         label: "Total",
+        color: "var(--primary-color)",
     },
 } satisfies ChartConfig
 
@@ -37,8 +39,8 @@ export default function UserPieChart() {
     return (
         <Card className="flex flex-col h-full">
             <CardHeader className="items-center pb-0">
-                <CardTitle>Grafik Total Pengguna Berdasarkan Gender</CardTitle>
-                <CardDescription>January - December</CardDescription>
+                <CardTitle>Pie Chart - Donut with Text</CardTitle>
+                <CardDescription>January - June 2024</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
                 <ChartContainer
@@ -56,7 +58,6 @@ export default function UserPieChart() {
                             nameKey="gender"
                             innerRadius={60}
                             strokeWidth={5}
-                            fill="#8884d8"
                         >
                             <Label
                                 content={({ viewBox }) => {
