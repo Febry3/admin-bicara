@@ -49,8 +49,8 @@ export default function UserChart() {
     return (
         <Card className="h-full">
             <CardHeader>
-                <CardTitle>Grafik Gender Pengguna</CardTitle>
-                <CardDescription>January - December</CardDescription>
+                <CardTitle>User by Gender Count</CardTitle>
+                <CardDescription>Overall</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig} className="h-65 w-full">
