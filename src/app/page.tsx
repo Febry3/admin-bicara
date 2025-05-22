@@ -4,27 +4,28 @@ import { Banknote, Handshake, UserRound, Users } from "lucide-react";
 import ConsultationChart from "@/components/charts/consultation-chart";
 import UserChart from "@/components/charts/user-chart";
 import UserPieChart from "@/components/charts/user-piechart";
+import { randomInt } from "crypto";
 
 export default function Home() {
   const dashboardCardData = [
     {
       title: "Total Counselor",
-      amount: 6990,
+      amount: randomInt(1000),
       icon: Users
     },
     {
       title: "Total Pengguna",
-      amount: 1234,
+      amount: randomInt(1000),
       icon: Users
     },
     {
       title: "Total Konsultasi",
-      amount: 6990,
+      amount: randomInt(1000),
       icon: Handshake
     },
     {
       title: "Total Pendapatan",
-      amount: 6990,
+      amount: randomInt(1000),
       icon: Banknote
     },
   ]
