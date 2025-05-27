@@ -7,7 +7,7 @@ export default function AppBreadcrumb() {
     const pathName = usePathname()
     const paths = pathName.split("/");
     return (
-        <Breadcrumb className="rounded-sm p-1 border-1 shadow-sm">
+        <Breadcrumb>
             <BreadcrumbList>
                 {paths.map((path, index) => (
                     <React.Fragment key={index}>
@@ -18,7 +18,7 @@ export default function AppBreadcrumb() {
                                 </p>
                             </BreadcrumbLink>
                         </BreadcrumbItem>
-                        <BreadcrumbSeparator />
+                        {index === 0 ? "" : <BreadcrumbSeparator />}
                     </React.Fragment>
                 ))}
             </BreadcrumbList>

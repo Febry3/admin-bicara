@@ -76,7 +76,7 @@ export default function ArticleTable() {
                         <TableCell>{article.title}</TableCell>
                         <TableCell>{article.body}</TableCell>
                         <TableCell>
-                            <div className="relative w-[200px] aspect-video">
+                            <div className="relative w-[250px] aspect-video">
                                 <Image
                                     src={article.image}
                                     alt="gambar"
