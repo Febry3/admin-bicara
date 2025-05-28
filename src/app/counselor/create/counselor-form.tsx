@@ -17,12 +17,14 @@ import {
 import { Input } from "@/components/ui/input"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { CalendarIcon } from "lucide-react"
+import { CalendarIcon, ImagePlus } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import RouteButton from "@/components/buttons/RouteButton"
 
 import { redirect } from "next/navigation"
+import FileUpload from "@/components/file-upload"
+import { useState } from "react"
 
 const formSchema = z.object({
     email: z.string().email({ message: "Invalid email" }),
@@ -38,6 +40,7 @@ const formSchema = z.object({
 })
 
 export function CounselorForm() {
+    let [file, setFile] = useState<string | undefined>("");
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -53,7 +56,7 @@ export function CounselorForm() {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+        console.log(file)
         redirect("/counselor");
     }
 
@@ -70,8 +73,8 @@ export function CounselorForm() {
                 </div>
             </div>
             <form className="space-y-8">
-                <div className="grid grid-cols-10 mt-5">
-                    <div className="col-span-7 border rounded-md shadow-sm p-7 flex flex-col gap-5">
+                <div className="grid grid-cols-12 mt-5 gap-5">
+                    <div className="col-span-8 border rounded-md shadow-sm p-7 flex flex-col gap-5">
                         <p className="text-xl">Counselor Data</p>
                         <FormField
                             control={form.control}
@@ -227,9 +230,13 @@ export function CounselorForm() {
                         </div>
 
                     </div>
+                    <div className="col-span-4 border rounded-md shadow-sm p-7 flex flex-col gap-5 h-90">
+                        <p className="text-xl">Upload Image</p>
+                        <div className="border-2 border-black rounded-sm border-dashed h-full p-5 flex flex-col justify-center gap-3 items-center">
+                            <FileUpload file={file} setFile={setFile} />
+                        </div>
+                    </div>
                 </div>
-
-
             </form>
         </Form >
     )
