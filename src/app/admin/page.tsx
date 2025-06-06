@@ -1,9 +1,14 @@
 import RouteButton from "@/components/buttons/RouteButton";
 import SearchBox from "@/components/search-box";
 import AdminTable from "@/components/tables/admin-table";
-import { Button } from "@/components/ui/button";
+import adminUtilities from "@/lib/adminUtilities";
+import { apiUrl } from "@/lib/axiosClient";
+import { UserAttribute } from "@/types/app-type";
 
-export default function AdminPage() {
+export default async function AdminPage() {
+    const response = await fetch(`${apiUrl}admin/account/admin`, { method: 'GET' })
+    const counselors = await response.json();
+
     return (
         <div className="flex flex-col gap-3">
             <h1 className="text-2xl font-medium">Halaman Admin</h1>
@@ -12,7 +17,7 @@ export default function AdminPage() {
                 <RouteButton title="Create New Admin" path="/admin/create" />
             </div>
             <div className="border-1 rounded-sm shadow-sm mt-3">
-                <AdminTable />
+                <AdminTable counselors={counselors.data} />
             </div>
         </div>
     )

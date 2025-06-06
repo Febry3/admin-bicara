@@ -1,4 +1,4 @@
-import { CounselorAttribute } from "@/types/app-type";
+import { UserAttribute } from "@/types/app-type";
 import axiosClient from "./axiosClient";
 import { AxiosError, AxiosResponse } from "axios";
 
@@ -9,14 +9,14 @@ class CounselorUtilities {
 
     public async createCounselor(formData: FormData): Promise<AxiosResponse> {
         try {
-            const response = await axiosClient.post("/admin/account?role=admin", formData);
+            const response = await axiosClient.post("/admin/account?role=counselor", formData);
             return response.data;
         } catch (err: any) {
             return err.response as AxiosResponse;
         }
     }
 
-    public async editCounselor(id: number, counselor: CounselorAttribute): Promise<void> {
+    public async editCounselor(id: number, counselor: UserAttribute): Promise<void> {
 
     }
 

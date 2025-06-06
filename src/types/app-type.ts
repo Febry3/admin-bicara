@@ -14,7 +14,7 @@ interface IPaymentCard {
     status: string
 }
 
-interface CounselorAttribute {
+interface UserAttribute {
     email: string,
     phone_number: string,
     password: string,
@@ -24,10 +24,11 @@ interface CounselorAttribute {
     gender: string,
     birthdate: Date,
     image: any,
+    created_at: string
 }
 
 export type {
     IDashboardCard,
     IPaymentCard,
-    CounselorAttribute
+    UserAttribute
 }

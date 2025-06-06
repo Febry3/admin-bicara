@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { CalendarIcon, ImagePlus } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn, objectUrlToBlob } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import RouteButton from "@/components/buttons/RouteButton"
 
@@ -26,6 +26,8 @@ import { redirect } from "next/navigation"
 import FileUpload from "@/components/file-upload"
 import { useState } from "react"
 import Loader from "@/components/loader";
+import adminUtilities from "@/lib/adminUtilities";
+import { toast, Toaster } from "sonner";
 
 const adminFormSchema = z.object({
     email: z.string().email({ message: "Invalid email" }),
@@ -58,18 +60,45 @@ export function AdminForm() {
     })
 
     async function onSubmit(values: z.infer<typeof adminFormSchema>) {
+        let formData = new FormData();
+        const blob = await objectUrlToBlob(file!);
+
+        formData.append("email", values.email);
+        formData.append("phone_number", values.phone_number);
+        formData.append("password", values.password);
+        formData.append("role", values.role);
+        formData.append("name", values.name);
+        formData.append("nickname", values.nickname);
+        formData.append("gender", values.gender);
+        formData.append("birthdate", values.birthdate.toDateString());
+
+        if (blob.type.includes("image")) {
+            formData.append("image", blob);
+        }
         setIsLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        const response = await adminUtilities.createAdmin(formData);
+        console.log(response.status)
+        if (response.status != 422) {
+            redirect("/admin");
+        } else {
+            toast(
+                <p className="text-red-500 font-bold">An error occured</p>,
+                {
+                    description:
+                        <div>
+                            <p>{response.data.message.email[0]}</p>
+                            <p>{response.data.message.phone_number[0]}</p>
+                        </div>,
+                });
+        }
         setIsLoading(false);
-        // redirect("/admin");
     }
 
     return (
         <div className="relative">
             <Form {...form}>
-                {
-                    isLoading && <Loader />
-                }
+                <Toaster position="bottom-right" />
+                {isLoading && <Loader />}
                 <div className="flex flex-row items-center justify-between mt-7">
                     <div className="flex flex-row items-center gap-3">
                         <RouteButton className="bg-white text-black border shadow-sm" variant="outline" path="/counselor" title="Back" />
@@ -226,7 +255,6 @@ export function AdminForm() {
                                                             disabled={(date) =>
                                                                 date > new Date() || date < new Date("1900-01-01")
                                                             }
-                                                            initialFocus
                                                         />
                                                     </PopoverContent>
                                                 </Popover>
