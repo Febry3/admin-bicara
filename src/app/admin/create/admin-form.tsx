@@ -78,7 +78,7 @@ export function AdminForm() {
         setIsLoading(true);
         const response = await adminUtilities.createAdmin(formData);
         console.log(response.status)
-        if (response.status != 422) {
+        if (response.status !== 422) {
             redirect("/admin");
         } else {
             toast(

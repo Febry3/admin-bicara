@@ -9,6 +9,7 @@ class AdminUtilities {
             return response.data;
         } catch (err: any) {
             console.error(err);
+            console.log(err.response)
             return err.response as AxiosResponse;
         }
     }
