@@ -15,7 +15,7 @@ export default function FileUpload({ file, setFile }: FileUploadProps) {
 
     function handleReset(e: any) {
         e.preventDefault();
-        console.log(file);
+        setFile("");
     }
     return (
         <div className="h-full w-full">
@@ -70,7 +70,6 @@ export default function FileUpload({ file, setFile }: FileUploadProps) {
                         type="file"
                         className="hidden"
                         onChange={(e) => {
-                            console.log(e.target.files);
                             let files = e.target.files;
                             if (files && files[0]) {
                                 let blobUrl = URL.createObjectURL(files[0]);

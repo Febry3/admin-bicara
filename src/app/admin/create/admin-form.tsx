@@ -1,9 +1,10 @@
 "use client"
-
+import { BarLoader } from "react-spinners";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { format } from "date-fns"
+
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -17,22 +18,20 @@ import { Input } from "@/components/ui/input"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { CalendarIcon, ImagePlus } from "lucide-react"
-import { cn, objectUrlToBlob } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import RouteButton from "@/components/buttons/RouteButton"
 
 import { redirect } from "next/navigation"
 import FileUpload from "@/components/file-upload"
-import { Suspense, useState } from "react"
-import counselorUtilities from "@/lib/counselorUtilities"
-import Loader from "@/components/loader"
-import { toast, Toaster } from "sonner"
+import { useState } from "react"
+import Loader from "@/components/loader";
 
-const formSchema = z.object({
+const adminFormSchema = z.object({
     email: z.string().email({ message: "Invalid email" }),
     phone_number: z.string().regex(/^08[0-9]{8,12}$/),
     password: z.string().min(1, { message: "Required Password" }),
-    role: z.enum(["Counselor"]),
+    role: z.enum(["Admin"]),
     name: z.string().min(1, { message: "Required Name" }),
     nickname: z.string().min(1, { message: "Required Nickname" }),
     gender: z.enum(["male", "female"], {
@@ -41,16 +40,16 @@ const formSchema = z.object({
     birthdate: z.date({ message: "Required Birthdate" })
 })
 
-export function CounselorForm() {
+export function AdminForm() {
     let [isLoading, setIsLoading] = useState<boolean>(false);
     let [file, setFile] = useState<string | undefined>("");
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof adminFormSchema>>({
+        resolver: zodResolver(adminFormSchema),
         defaultValues: {
             email: "",
             phone_number: "",
             password: "",
-            role: "Counselor",
+            role: "Admin",
             name: "",
             nickname: "",
             gender: undefined,
@@ -58,50 +57,23 @@ export function CounselorForm() {
         },
     })
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        let formData = new FormData();
-        const blob = await objectUrlToBlob(file!);
-
-        formData.append("email", values.email);
-        formData.append("phone_number", values.phone_number);
-        formData.append("password", values.password);
-        formData.append("role", values.role);
-        formData.append("name", values.name);
-        formData.append("nickname", values.nickname);
-        formData.append("gender", values.gender);
-        formData.append("birthdate", values.birthdate.toDateString());
-
-        if (blob.type.includes("image")) {
-            formData.append("image", blob);
-        }
+    async function onSubmit(values: z.infer<typeof adminFormSchema>) {
         setIsLoading(true);
-        const response = await counselorUtilities.createCounselor(formData);
-        console.log(response.status)
-        if (response.status != 422) {
-            redirect("/counselor");
-        } else {
-            toast(
-                <p className="text-red-500 font-bold">An error occured</p>,
-                {
-                    description:
-                        <div>
-                            <p>{response.data.message.email[0]}</p>
-                            <p>{response.data.message.phone_number[0]}</p>
-                        </div>,
-                });
-        }
+        await new Promise(resolve => setTimeout(resolve, 3000));
         setIsLoading(false);
+        // redirect("/admin");
     }
 
     return (
         <div className="relative">
             <Form {...form}>
-                <Toaster position="bottom-right" />
-                {isLoading && <Loader />}
+                {
+                    isLoading && <Loader />
+                }
                 <div className="flex flex-row items-center justify-between mt-7">
                     <div className="flex flex-row items-center gap-3">
                         <RouteButton className="bg-white text-black border shadow-sm" variant="outline" path="/counselor" title="Back" />
-                        <h1 className="text-2xl font-medium">Create Counselor Form</h1>
+                        <h1 className="text-2xl font-medium">Create Admin Form</h1>
                     </div>
                     <div className="flex flex-row gap-3">
                         <RouteButton path="/counselor" title="Discard" className="bg-white text-black border shadow-sm" variant="outline" />
@@ -111,7 +83,7 @@ export function CounselorForm() {
                 <form className="space-y-8">
                     <div className="grid grid-cols-12 mt-5 gap-5">
                         <div className="col-span-8 border rounded-md shadow-sm p-7 flex flex-col gap-5">
-                            <p className="text-xl">Counselor Data</p>
+                            <p className="text-xl">Admin Data</p>
                             <FormField
                                 control={form.control}
                                 name="email"

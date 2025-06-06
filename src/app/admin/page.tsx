@@ -1,3 +1,4 @@
+import RouteButton from "@/components/buttons/RouteButton";
 import SearchBox from "@/components/search-box";
 import AdminTable from "@/components/tables/admin-table";
 import { Button } from "@/components/ui/button";
@@ -8,7 +9,7 @@ export default function AdminPage() {
             <h1 className="text-2xl font-medium">Halaman Admin</h1>
             <div className="w-full flex flex-row justify-between">
                 <SearchBox />
-                <Button>Create New Admin</Button>
+                <RouteButton title="Create New Admin" path="/admin/create" />
             </div>
             <div className="border-1 rounded-sm shadow-sm mt-3">
                 <AdminTable />

@@ -1,3 +1,4 @@
+import { Blob } from "buffer"
 import { LucideProps } from "lucide-react"
 import { ForwardRefExoticComponent, RefAttributes } from "react"
 
@@ -13,7 +14,20 @@ interface IPaymentCard {
     status: string
 }
 
+interface CounselorAttribute {
+    email: string,
+    phone_number: string,
+    password: string,
+    role: string,
+    name: string,
+    nickname: string,
+    gender: string,
+    birthdate: Date,
+    image: any,
+}
+
 export type {
     IDashboardCard,
-    IPaymentCard
+    IPaymentCard,
+    CounselorAttribute
 }
