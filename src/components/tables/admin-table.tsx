@@ -1,9 +1,9 @@
+"use client"
+
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
@@ -11,7 +11,6 @@ import {
 
 import TableAction from "../table-action"
 import { UserAttribute } from "@/types/app-type";
-import { apiUrl } from "@/lib/axiosClient";
 
 export default function AdminTable({ admins }: { admins: UserAttribute[] }) {
     return (
@@ -37,7 +36,7 @@ export default function AdminTable({ admins }: { admins: UserAttribute[] }) {
                         <TableCell>{admin.role}</TableCell>
                         <TableCell>{admin.created_at}</TableCell>
                         <TableCell className="text-center">
-                            <TableAction view={`/admin/${admin.id}/view`} edit={`/admin/${admin.id}/edit`} del={`${apiUrl}`} />
+                            <TableAction view={`/admin/${admin.id}/view`} edit={`/admin/${admin.id}/edit`} del={admin.id} />
                         </TableCell>
                     </TableRow>
                 ))}

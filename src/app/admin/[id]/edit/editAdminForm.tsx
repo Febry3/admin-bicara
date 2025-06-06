@@ -33,14 +33,14 @@ import { UserAttribute } from "@/types/app-type";
 const adminFormSchema = z.object({
     email: z.string().email({ message: "Invalid email" }),
     phone_number: z.string().regex(/^08[0-9]{8,12}$/),
-    password: z.string().min(1, { message: "Required Password" }),
+    password: z.string().optional(),
     role: z.enum(["Admin"]),
     name: z.string().min(1, { message: "Required Name" }),
     nickname: z.string().min(1, { message: "Required Nickname" }),
     gender: z.enum(["male", "female"], {
         message: "Invalid Gender"
     }),
-    birthdate: z.date({ message: "Required Birthdate" })
+    birthdate: z.date().optional(),
 })
 
 export default function EditAdminForm({ admin }: { admin: UserAttribute }) {
@@ -51,34 +51,25 @@ export default function EditAdminForm({ admin }: { admin: UserAttribute }) {
         defaultValues: {
             email: admin.email,
             phone_number: admin.phone_number,
-            password: admin.password,
             role: admin.role as "Admin" || "",
             name: admin.name,
             nickname: admin.nickname,
             gender: admin.gender as "female" || "male",
-            birthdate: admin.birthdate
+            birthdate: new Date(admin.birthdate)
         },
     })
 
     async function onSubmit(values: z.infer<typeof adminFormSchema>) {
-        let formData = new FormData();
-        const blob = await objectUrlToBlob(file!);
-
-        formData.append("email", values.email);
-        formData.append("phone_number", values.phone_number);
-        formData.append("password", values.password);
-        formData.append("role", values.role);
-        formData.append("name", values.name);
-        formData.append("nickname", values.nickname);
-        formData.append("gender", values.gender);
-        formData.append("birthdate", values.birthdate.toDateString());
-
-        if (blob.type.includes("image")) {
-            formData.append("image", blob);
-        }
         setIsLoading(true);
-        const response = await adminUtilities.createAdmin(formData);
-        console.log(response.status)
+        const response = await adminUtilities.editAdmin({
+            email: values.email,
+            phone_number: values.phone_number,
+            name: values.name,
+            nickname: values.nickname,
+            birthdate: values.birthdate,
+            gender: values.gender,
+            id: admin.id
+        } as UserAttribute);
         if (response.status != 422) {
             redirect("/admin");
         } else {
@@ -87,8 +78,7 @@ export default function EditAdminForm({ admin }: { admin: UserAttribute }) {
                 {
                     description:
                         <div>
-                            <p>{response.data.message.email[0]}</p>
-                            <p>{response.data.message.phone_number[0]}</p>
+                            <p>{response.data.message}</p>
                         </div>,
                 });
         }
@@ -151,7 +141,7 @@ export default function EditAdminForm({ admin }: { admin: UserAttribute }) {
                                             <FormItem>
                                                 <FormLabel>Password</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder="Password" type="password" {...field} />
+                                                    <Input disabled placeholder="Password" type="password" {...field} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>

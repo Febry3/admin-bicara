@@ -23,6 +23,33 @@ class AdminUtilities {
             return [];
         }
     }
+
+    public async editAdmin(admin: UserAttribute): Promise<AxiosResponse> {
+        try {
+            console.log(admin.id);
+            const response = await axiosClient.put(`/admin/account/${admin.id}`, {
+                email: admin.email,
+                phone_number: admin.phone_number,
+                name: admin.name,
+                nickname: admin.nickname,
+                birthdate: admin.birthdate,
+                gender: admin.gender
+            });
+            return response.data;
+        } catch (err: any) {
+            console.error(err);
+            return err.response as AxiosResponse;
+        }
+    }
+
+    public async deleteAdmin(id: string): Promise<void> {
+        try {
+
+            const response = await axiosClient.delete(`/admin/account/${id}`);
+        } catch (err: any) {
+            console.error(err);
+        }
+    }
 }
 
 export default new AdminUtilities;
