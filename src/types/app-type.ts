@@ -15,6 +15,7 @@ interface IPaymentCard {
 }
 
 interface UserAttribute {
+    id: string,
     email: string,
     phone_number: string,
     password: string,
