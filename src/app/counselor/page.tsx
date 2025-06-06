@@ -1,9 +1,11 @@
 import RouteButton from "@/components/buttons/RouteButton";
 import SearchBox from "@/components/search-box";
 import CounselorTable from "@/components/tables/counselor-table";
+import { apiUrl } from "@/lib/axiosClient";
 
-export default function CounselorPage() {
-
+export default async function CounselorPage() {
+    const response = await fetch(`${apiUrl}admin/account/counselor`, { method: 'GET' })
+    const counselors = await response.json();
     return (
         <div className="flex flex-col gap-3">
             <h1 className="text-2xl font-medium">Halaman Counselor</h1>
@@ -12,7 +14,7 @@ export default function CounselorPage() {
                 <RouteButton title="Create New Counselor" path="/counselor/create" />
             </div>
             <div className="border-1 rounded-sm shadow-sm mt-3">
-                <CounselorTable />
+                <CounselorTable counselors={counselors.data} />
             </div>
         </div>
     )

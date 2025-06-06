@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/table"
 import TableAction from "../table-action"
 import { randomInt } from "crypto"
+import { UserAttribute } from "@/types/app-type";
 
 const counselors = [
     {
@@ -182,7 +183,7 @@ const counselors = [
     }
 ];
 
-export default function CounselorTable() {
+export default function CounselorTable({ counselors }: { counselors: any[] }) {
     return (
         <Table>
             <TableHeader>
@@ -210,7 +211,7 @@ export default function CounselorTable() {
                         <TableCell>{counselor.totalConsulting}</TableCell>
                         <TableCell>{counselor.revenue}</TableCell>
                         <TableCell className="text-center">
-                            <TableAction />
+                            <TableAction view={`/admin/${counselor.id}/view`} edit={`/admin/${counselor.id}/edit`} del={counselor.id} />
                         </TableCell>
                     </TableRow>
                 ))}
