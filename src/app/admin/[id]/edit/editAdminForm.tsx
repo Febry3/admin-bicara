@@ -44,8 +44,8 @@ const adminFormSchema = z.object({
 })
 
 export default function EditAdminForm({ admin }: { admin: UserAttribute }) {
-    let [isLoading, setIsLoading] = useState<boolean>(false);
-    let [file, setFile] = useState<string | undefined>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [file, setFile] = useState<string | undefined>("");
     const form = useForm<z.infer<typeof adminFormSchema>>({
         resolver: zodResolver(adminFormSchema),
         defaultValues: {

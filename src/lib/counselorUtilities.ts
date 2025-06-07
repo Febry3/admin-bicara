@@ -1,6 +1,6 @@
 import { UserAttribute } from "@/types/app-type";
 import axiosClient from "./axiosClient";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 class CounselorUtilities {
     public async getAllCounselor(): Promise<void> {
@@ -11,18 +11,24 @@ class CounselorUtilities {
         try {
             const response = await axiosClient.post("/admin/account?role=counselor", formData);
             return response.data;
-        } catch (err: any) {
-            return err.response as AxiosResponse;
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                console.error(err);
+                console.log(err.response);
+                return err.response as AxiosResponse;
+            }
+            console.error("An unexpected error occurred:", err);
+            throw err;
         }
     }
 
-    public async editCounselor(id: number, counselor: UserAttribute): Promise<void> {
+    // public async editCounselor(id: number, counselor: UserAttribute): Promise<void> {
 
-    }
+    // }
 
-    public async deleteCounselor(id: number): Promise<void> {
+    // public async deleteCounselor(id: number): Promise<void> {
 
-    }
+    // }
 }
 
 export default new CounselorUtilities;

@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import axiosClient from "./axiosClient";
 import { UserAttribute } from "@/types/app-type";
 
@@ -7,10 +7,14 @@ class AdminUtilities {
         try {
             const response = await axiosClient.post("/admin/account?role=admin", formData);
             return response.data;
-        } catch (err: any) {
-            console.error(err);
-            console.log(err.response)
-            return err.response as AxiosResponse;
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                console.error(err);
+                console.log(err.response);
+                return err.response as AxiosResponse;
+            }
+            console.error("An unexpected error occurred:", err);
+            throw err;
         }
     }
 
@@ -19,9 +23,9 @@ class AdminUtilities {
             const response = await axiosClient.get("/admin/account/admin");
             console.log(response.data.data)
             return response.data.data;
-        } catch (err: any) {
+        } catch (err) {
             console.error(err);
-            return [];
+            throw err;
         }
     }
 
@@ -37,18 +41,24 @@ class AdminUtilities {
                 gender: admin.gender
             });
             return response.data;
-        } catch (err: any) {
-            console.error(err);
-            return err.response as AxiosResponse;
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                console.error(err);
+                console.log(err.response);
+                return err.response as AxiosResponse;
+            }
+            console.error("An unexpected error occurred:", err);
+            throw err;
         }
     }
 
     public async deleteAdmin(id: string): Promise<void> {
         try {
 
-            const response = await axiosClient.delete(`/admin/account/${id}`);
-        } catch (err: any) {
+            await axiosClient.delete(`/admin/account/${id}`);
+        } catch (err) {
             console.error(err);
+            throw err;
         }
     }
 }

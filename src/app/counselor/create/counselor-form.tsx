@@ -42,8 +42,8 @@ const formSchema = z.object({
 })
 
 export function CounselorForm() {
-    let [isLoading, setIsLoading] = useState<boolean>(false);
-    let [file, setFile] = useState<string | undefined>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [file, setFile] = useState<string | undefined>("");
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -59,7 +59,7 @@ export function CounselorForm() {
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        let formData = new FormData();
+        const formData = new FormData();
         const blob = await objectUrlToBlob(file!);
 
         formData.append("email", values.email);

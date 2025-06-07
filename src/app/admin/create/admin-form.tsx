@@ -43,8 +43,8 @@ const adminFormSchema = z.object({
 })
 
 export function AdminForm() {
-    let [isLoading, setIsLoading] = useState<boolean>(false);
-    let [file, setFile] = useState<string | undefined>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [file, setFile] = useState<string | undefined>("");
     const form = useForm<z.infer<typeof adminFormSchema>>({
         resolver: zodResolver(adminFormSchema),
         defaultValues: {
@@ -60,7 +60,7 @@ export function AdminForm() {
     })
 
     async function onSubmit(values: z.infer<typeof adminFormSchema>) {
-        let formData = new FormData();
+        const formData = new FormData();
         const blob = await objectUrlToBlob(file!);
 
         formData.append("email", values.email);

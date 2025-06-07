@@ -7,8 +7,14 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import TableAction from "../table-action"
+import { UserAttribute } from "@/types/app-type"
 
-export default function CounselorTable({ counselors }: { counselors: any[] }) {
+interface CounselorAttribute extends UserAttribute {
+    totalConsultations: number,
+    revenue: number
+}
+
+export default function CounselorTable({ counselors }: { counselors: CounselorAttribute[] }) {
     return (
         <Table>
             <TableHeader>
@@ -33,7 +39,7 @@ export default function CounselorTable({ counselors }: { counselors: any[] }) {
                         <TableCell>{counselor.gender}</TableCell>
                         <TableCell>{counselor.role}</TableCell>
                         <TableCell>{counselor.created_at}</TableCell>
-                        <TableCell>{counselor.totalConsulting}</TableCell>
+                        <TableCell>{counselor.totalConsultations}</TableCell>
                         <TableCell>{counselor.revenue}</TableCell>
                         <TableCell className="text-center">
                             <TableAction view={`/admin/${counselor.id}/view`} edit={`/admin/${counselor.id}/edit`} del={counselor.id} />

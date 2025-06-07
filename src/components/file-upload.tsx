@@ -11,8 +11,6 @@ interface FileUploadProps {
 }
 
 export default function FileUpload({ file, setFile }: FileUploadProps) {
-    const [fileEnter, setFileEnter] = useState(false);
-
     function handleReset(e: any) {
         e.preventDefault();
         setFile("");
@@ -23,24 +21,20 @@ export default function FileUpload({ file, setFile }: FileUploadProps) {
                 <div
                     onDragOver={(e) => {
                         e.preventDefault();
-                        setFileEnter(true);
                     }}
-                    onDragLeave={(e) => {
-                        setFileEnter(false);
+                    onDragLeave={() => {
                     }}
                     onDragEnd={(e) => {
                         e.preventDefault();
-                        setFileEnter(false);
                     }}
                     onDrop={(e) => {
                         e.preventDefault();
-                        setFileEnter(false);
                         if (e.dataTransfer.items) {
                             [...e.dataTransfer.items].forEach((item, i) => {
                                 if (item.kind === "file") {
                                     const file = item.getAsFile();
                                     if (file) {
-                                        let blobUrl = URL.createObjectURL(file);
+                                        const blobUrl = URL.createObjectURL(file);
                                         setFile(blobUrl);
                                     }
                                     console.log(`items file[${i}].name = ${file?.name}`);
@@ -70,9 +64,9 @@ export default function FileUpload({ file, setFile }: FileUploadProps) {
                         type="file"
                         className="hidden"
                         onChange={(e) => {
-                            let files = e.target.files;
+                            const files = e.target.files;
                             if (files && files[0]) {
-                                let blobUrl = URL.createObjectURL(files[0]);
+                                const blobUrl = URL.createObjectURL(files[0]);
                                 setFile(blobUrl);
                             }
                         }}

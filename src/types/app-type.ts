@@ -1,4 +1,3 @@
-import { Blob } from "buffer"
 import { LucideProps } from "lucide-react"
 import { ForwardRefExoticComponent, RefAttributes } from "react"
 
@@ -24,7 +23,7 @@ interface UserAttribute {
     nickname: string,
     gender: string,
     birthdate: Date,
-    image: any,
+    image: Blob | string,
     created_at: string
 }
 
