@@ -7,7 +7,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import TableAction from "../table-action"
-import { UserAttribute } from "@/types/app-type"
+// import { UserAttribute } from "@/types/app-type"
 import { randomInt } from "crypto";
 
 // interface CounselorAttribute extends UserAttribute {

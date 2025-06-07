@@ -1,7 +1,7 @@
 import RouteButton from "@/components/buttons/RouteButton";
 import SearchBox from "@/components/search-box";
 import CounselorTable from "@/components/tables/counselor-table";
-import { apiUrl } from "@/lib/axiosClient";
+// import { apiUrl } from "@/lib/axiosClient";
 
 export default async function CounselorPage() {
     // const response = await fetch(`${apiUrl}admin/account/counselor`, { method: 'GET' })
