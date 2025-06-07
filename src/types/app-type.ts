@@ -27,8 +27,24 @@ interface UserAttribute {
     created_at: string
 }
 
+interface TransactionAttribute {
+    name: string,
+    bank: string,
+    transactionId: string,
+    method: string,
+    status: string,
+    amount: number
+}
+
+interface PaymentChartAttribute {
+    time: string,
+    totalTransactions: number
+}
+
 export type {
     IDashboardCard,
     IPaymentCard,
-    UserAttribute
+    UserAttribute,
+    TransactionAttribute,
+    PaymentChartAttribute
 }

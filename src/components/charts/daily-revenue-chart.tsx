@@ -15,6 +15,7 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart"
+import { PaymentChartAttribute } from "@/types/app-type"
 const chartData = [
     { time: "00:00", payment: 224 },
     { time: "03:00", payment: 186 },
@@ -34,7 +35,7 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export function DailyRevenueChart() {
+export function DailyRevenueChart({ chartData }: { chartData: PaymentChartAttribute[] }) {
     return (
         <Card className="h-full">
             <CardHeader>
@@ -44,7 +45,7 @@ export function DailyRevenueChart() {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <ChartContainer config={chartConfig} className="h-65 w-full">
+                <ChartContainer config={chartConfig} className="h-65 py-6 w-full">
                     <AreaChart
                         accessibilityLayer
                         data={chartData}
@@ -66,7 +67,7 @@ export function DailyRevenueChart() {
                             content={<ChartTooltipContent indicator="line" />}
                         />
                         <Area
-                            dataKey="payment"
+                            dataKey="totalTransactions"
                             type="natural"
                             fill="var(--primary-color)"
                             fillOpacity={0.4}
