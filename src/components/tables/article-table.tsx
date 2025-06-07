@@ -89,7 +89,7 @@ export default function ArticleTable() {
                             <ArticleStatusBadge status={article.status.toLowerCase()} />
                         </TableCell>
                         <TableCell className="text-center">
-                            <TableAction />
+                            <TableAction edit="" del="" view="" />
                         </TableCell>
                     </TableRow>
                 ))}

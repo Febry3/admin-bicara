@@ -1,9 +1,7 @@
 import RouteButton from "@/components/buttons/RouteButton";
 import SearchBox from "@/components/search-box";
 import AdminTable from "@/components/tables/admin-table";
-import adminUtilities from "@/lib/adminUtilities";
 import { apiUrl } from "@/lib/axiosClient";
-import { UserAttribute } from "@/types/app-type";
 
 export default async function AdminPage() {
     const response = await fetch(`${apiUrl}admin/account/admin`, { method: 'GET' })

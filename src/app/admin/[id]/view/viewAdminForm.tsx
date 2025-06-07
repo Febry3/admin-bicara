@@ -2,7 +2,6 @@
 
 import RouteButton from "@/components/buttons/RouteButton";
 import { UserAttribute } from "@/types/app-type";
-import Image from "next/image";
 
 const DataField = ({ label, value }: { label: string, value: string | undefined | null }) => (
     <div className="flex flex-col space-y-1.5">

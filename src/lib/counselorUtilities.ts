@@ -1,6 +1,6 @@
 import { UserAttribute } from "@/types/app-type";
 import axiosClient from "./axiosClient";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 
 class CounselorUtilities {
     public async getAllCounselor(): Promise<void> {

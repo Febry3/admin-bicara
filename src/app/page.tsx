@@ -1,6 +1,6 @@
 import DashboardCard from "@/components/dashboard-card";
 import RevenueChart from "@/components/charts/revenue-chart";
-import { Banknote, Handshake, UserRound, Users } from "lucide-react";
+import { Banknote, Handshake, Users } from "lucide-react";
 import ConsultationChart from "@/components/charts/consultation-chart";
 import UserChart from "@/components/charts/user-chart";
 import UserPieChart from "@/components/charts/user-piechart";

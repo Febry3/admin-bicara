@@ -1,8 +1,6 @@
 import { DailyRevenueChart } from "@/components/charts/daily-revenue-chart";
 import PaymentCard from "@/components/payment-card";
-import PaymentStatusBadge from "@/components/payment-status-badge";
 import PaymentTable from "@/components/tables/payment-table";
-import { Card } from "@/components/ui/card";
 import { randomInt } from "crypto";
 
 export default function ReportPage() {
