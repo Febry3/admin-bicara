@@ -1,3 +1,4 @@
+import { UserAttribute } from "@/types/app-type";
 import axiosClient from "./axiosClient";
 import { AxiosError, AxiosResponse } from "axios";
 
@@ -20,10 +21,6 @@ class CounselorUtilities {
             throw err;
         }
     }
-
-    // public async editCounselor(id: number, counselor: UserAttribute): Promise<void> {
-
-    // }
 
     // public async deleteCounselor(id: number): Promise<void> {
 

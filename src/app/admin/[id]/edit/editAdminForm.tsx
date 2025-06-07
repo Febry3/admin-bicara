@@ -258,9 +258,9 @@ export default function EditAdminForm({ admin }: { admin: UserAttribute }) {
 
                         </div>
                         <div className="col-span-4 border rounded-md shadow-sm p-7 flex flex-col gap-5 h-90">
-                            <p className="text-xl">Upload Image</p>
-                            <div className="border-2 border-black rounded-sm border-dashed h-full p-5 flex flex-col justify-center gap-3 items-center">
-                                <FileUpload file={file} setFile={setFile} />
+                            <p className="text-xl font-semibold text-gray-800">Profile Image</p>
+                            <div className="w-full aspect-square bg-gray-100 rounded-md flex items-center justify-center overflow-hidden">
+                                <span className="text-gray-500">No Image</span>
                             </div>
                         </div>
                     </div>

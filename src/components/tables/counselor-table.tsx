@@ -44,7 +44,7 @@ export default function CounselorTable({ counselors }: { counselors: CounselorAt
                         <TableCell>{counselor.totalConsultations}</TableCell>
                         <TableCell>{counselor.revenue}</TableCell>
                         <TableCell className="text-center">
-                            <TableAction view={`/admin/${counselor.id}/view`} edit={`/admin/${counselor.id}/edit`} del={counselor.id.toString()} />
+                            <TableAction view={`/counselor/${counselor.id}/view`} edit={`/counselor/${counselor.id}/edit`} del={counselor.id.toString()} />
                         </TableCell>
                     </TableRow>
                 ))}

@@ -12,7 +12,7 @@ const DataField = ({ label, value }: { label: string, value: string | undefined 
     </div>
 );
 
-export default function ViewAdminForm({ admin }: { admin: UserAttribute }) {
+export default function ViewCounselorForm({ admin }: { admin: UserAttribute }) {
     return (
         <div>
             <div className="flex flex-row items-center justify-between mt-7">
@@ -20,10 +20,10 @@ export default function ViewAdminForm({ admin }: { admin: UserAttribute }) {
                     <RouteButton
                         className="bg-white text-black border shadow-sm hover:bg-gray-50"
                         variant="outline"
-                        path="/admin"
+                        path="/counselor"
                         title="Back"
                     />
-                    <h1 className="text-2xl font-medium">Admin Details</h1>
+                    <h1 className="text-2xl font-medium">Counselor Details</h1>
                 </div>
             </div>
 

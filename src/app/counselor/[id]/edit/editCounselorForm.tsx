@@ -18,76 +18,65 @@ import { Input } from "@/components/ui/input"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { CalendarIcon } from "lucide-react"
-import { cn, objectUrlToBlob } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import RouteButton from "@/components/buttons/RouteButton"
 
 import { redirect } from "next/navigation"
-import FileUpload from "@/components/file-upload"
 import { useState } from "react"
 import Loader from "@/components/loader";
 import adminUtilities from "@/lib/adminUtilities";
 import { toast, Toaster } from "sonner";
+import { UserAttribute } from "@/types/app-type";
 
-const adminFormSchema = z.object({
+const counselorFormSchema = z.object({
     email: z.string().email({ message: "Invalid email" }),
     phone_number: z.string().regex(/^08[0-9]{8,12}$/),
-    password: z.string().min(1, { message: "Required Password" }),
-    role: z.enum(["Admin"]),
+    password: z.string().optional(),
+    role: z.enum(["Counselor"]),
     name: z.string().min(1, { message: "Required Name" }),
     nickname: z.string().min(1, { message: "Required Nickname" }),
     gender: z.enum(["male", "female"], {
         message: "Invalid Gender"
     }),
-    birthdate: z.date({ message: "Required Birthdate" })
+    birthdate: z.date().optional(),
 })
 
-export function AdminForm() {
+export default function EditCounselorForm({ admin }: { admin: UserAttribute }) {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [file, setFile] = useState<string | undefined>("");
-    const form = useForm<z.infer<typeof adminFormSchema>>({
-        resolver: zodResolver(adminFormSchema),
+    const form = useForm<z.infer<typeof counselorFormSchema>>({
+        resolver: zodResolver(counselorFormSchema),
         defaultValues: {
-            email: "",
-            phone_number: "",
-            password: "",
-            role: "Admin",
-            name: "",
-            nickname: "",
-            gender: undefined,
-            birthdate: undefined
+            email: admin.email,
+            phone_number: admin.phone_number,
+            role: admin.role as "Counselor" || "",
+            name: admin.name,
+            nickname: admin.nickname,
+            gender: admin.gender as "female" || "male",
+            birthdate: new Date(admin.birthdate)
         },
     })
 
-    async function onSubmit(values: z.infer<typeof adminFormSchema>) {
-        const formData = new FormData();
-        const blob = await objectUrlToBlob(file!);
-
-        formData.append("email", values.email);
-        formData.append("phone_number", values.phone_number);
-        formData.append("password", values.password);
-        formData.append("role", values.role);
-        formData.append("name", values.name);
-        formData.append("nickname", values.nickname);
-        formData.append("gender", values.gender);
-        formData.append("birthdate", values.birthdate.toDateString());
-
-        if (blob.type.includes("image")) {
-            formData.append("image", blob);
-        }
+    async function onSubmit(values: z.infer<typeof counselorFormSchema>) {
         setIsLoading(true);
-        const response = await adminUtilities.createAdmin(formData);
-
-        if (response.status !== 422) {
-            redirect("/admin");
+        const response = await adminUtilities.editAdmin({
+            email: values.email,
+            phone_number: values.phone_number,
+            name: values.name,
+            nickname: values.nickname,
+            birthdate: values.birthdate,
+            gender: values.gender,
+            id: admin.id
+        } as UserAttribute);
+        if (response.status != 422) {
+            redirect("/counselor");
         } else {
             toast(
                 <p className="text-red-500 font-bold">An error occured</p>,
                 {
                     description:
                         <div>
-                            <p>{response.data.message.email[0]}</p>
-                            <p>{response.data.message.phone_number[0]}</p>
+                            <p>{response.data.message}</p>
                         </div>,
                 });
         }
@@ -101,12 +90,12 @@ export function AdminForm() {
                 {isLoading && <Loader />}
                 <div className="flex flex-row items-center justify-between mt-7">
                     <div className="flex flex-row items-center gap-3">
-                        <RouteButton className="bg-white text-black border shadow-sm" variant="outline" path="/admin" title="Back" />
-                        <h1 className="text-2xl font-medium">Create Admin Form</h1>
+                        <RouteButton className="bg-white text-black border shadow-sm" variant="outline" path="/counselor" title="Back" />
+                        <h1 className="text-2xl font-medium">Edit Admin Form</h1>
                     </div>
                     <div className="flex flex-row gap-3">
                         <RouteButton path="/counselor" title="Discard" className="bg-white text-black border shadow-sm" variant="outline" />
-                        <Button className="hover:cursor-pointer" onClick={form.handleSubmit(onSubmit)}>Create</Button>
+                        <Button className="hover:cursor-pointer" onClick={form.handleSubmit(onSubmit)}>Edit</Button>
                     </div>
                 </div>
                 <form className="space-y-8">
@@ -150,7 +139,7 @@ export function AdminForm() {
                                             <FormItem>
                                                 <FormLabel>Password</FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder="Password" type="password" {...field} />
+                                                    <Input disabled placeholder="Password" type="password" {...field} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -267,9 +256,9 @@ export function AdminForm() {
 
                         </div>
                         <div className="col-span-4 border rounded-md shadow-sm p-7 flex flex-col gap-5 h-90">
-                            <p className="text-xl">Upload Image</p>
-                            <div className="border-2 border-black rounded-sm border-dashed h-full p-5 flex flex-col justify-center gap-3 items-center">
-                                <FileUpload file={file} setFile={setFile} />
+                            <p className="text-xl font-semibold text-gray-800">Profile Image</p>
+                            <div className="w-full aspect-square bg-gray-100 rounded-md flex items-center justify-center overflow-hidden">
+                                <span className="text-gray-500">No Image</span>
                             </div>
                         </div>
                     </div>
