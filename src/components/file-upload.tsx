@@ -2,7 +2,6 @@
 
 import { ImagePlus } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
 import { Button } from "./ui/button";
 
 interface FileUploadProps {
@@ -11,7 +10,7 @@ interface FileUploadProps {
 }
 
 export default function FileUpload({ file, setFile }: FileUploadProps) {
-    function handleReset(e: any) {
+    function handleReset(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         setFile("");
     }
