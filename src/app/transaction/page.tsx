@@ -21,7 +21,9 @@ export default async function ReportPage() {
                 </div>
             </div>
             <h1 className="text-2xl font-medium pt-5">Recent Payments</h1>
-            <PaymentTable transactions={transactions.data.payments} />
+            <div className="border-1 rounded-sm shadow-sm mt-3">
+                <PaymentTable transactions={transactions.data.payments} />
+            </div>
         </div>
     )
 }

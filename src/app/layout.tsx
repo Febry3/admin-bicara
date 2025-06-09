@@ -4,6 +4,7 @@ import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import AppBreadcrumb from "@/components/app-breadcrumb";
+import NextTopLoader from 'nextjs-toploader';
 
 const poppinSans = Poppins({
   weight: ['300', '400', '500', '600', '700', '800', '900'],
@@ -34,6 +35,7 @@ export default function RootLayout({
               <AppBreadcrumb />
             </div>
             <div className="pt-3 w-full">
+              <NextTopLoader color="#7D944D" />
               {children}
             </div>
           </main>

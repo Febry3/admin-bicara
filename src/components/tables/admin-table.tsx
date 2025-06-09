@@ -9,6 +9,7 @@ import {
 
 import TableAction from "../table-action"
 import { UserAttribute } from "@/types/app-type";
+import NoDataCell from "./no-data-cell";
 
 export default function AdminTable({ admins }: { admins: UserAttribute[] }) {
     return (
@@ -25,19 +26,27 @@ export default function AdminTable({ admins }: { admins: UserAttribute[] }) {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {admins.map((admin, index) => (
-                    <TableRow key={index}>
-                        <TableCell className="font-medium text-center">{index + 1}</TableCell>
-                        <TableCell>{admin.name}</TableCell>
-                        <TableCell>{admin.phone_number}</TableCell>
-                        <TableCell>{admin.gender}</TableCell>
-                        <TableCell>{admin.role}</TableCell>
-                        <TableCell>{admin.created_at}</TableCell>
-                        <TableCell className="text-center">
-                            <TableAction view={`/admin/${admin.id}/view`} edit={`/admin/${admin.id}/edit`} del={admin.id} />
-                        </TableCell>
-                    </TableRow>
-                ))}
+                {
+                    admins.length > 0 ?
+                        admins.map((admin, index) => (
+                            <TableRow key={index}>
+                                <TableCell className="font-medium text-center">{index + 1}</TableCell>
+                                <TableCell>{admin.name}</TableCell>
+                                <TableCell>{admin.phone_number}</TableCell>
+                                <TableCell>{admin.gender}</TableCell>
+                                <TableCell>{admin.role}</TableCell>
+                                <TableCell>{admin.created_at}</TableCell>
+                                <TableCell className="text-center">
+                                    <TableAction view={`/admin/${admin.id}/view`} edit={`/admin/${admin.id}/edit`} del={admin.id} role="admin" />
+                                </TableCell>
+                            </TableRow>
+                        )) :
+                        <TableRow>
+                            <TableCell colSpan={9} className="text-center py-12">
+                                <NoDataCell />
+                            </TableCell>
+                        </TableRow>
+                }
             </TableBody>
         </Table >
     )

@@ -1,5 +1,5 @@
 "use client"
-import { Home, Newspaper, Search, UserRoundCog, Users } from "lucide-react"
+import { ArrowLeftRight, Home, Newspaper, UserRoundCog, Users } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 import {
@@ -36,7 +36,7 @@ const menu = [
     {
         title: "Transaction",
         url: "/transaction",
-        icon: Search,
+        icon: ArrowLeftRight,
     },
     {
         title: "Admin",

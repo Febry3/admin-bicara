@@ -90,8 +90,7 @@ export default function EditCounselorForm({ admin }: { admin: UserAttribute }) {
                 {isLoading && <Loader />}
                 <div className="flex flex-row items-center justify-between mt-7">
                     <div className="flex flex-row items-center gap-3">
-                        <RouteButton className="bg-white text-black border shadow-sm" variant="outline" path="/counselor" title="Back" />
-                        <h1 className="text-2xl font-medium">Edit Admin Form</h1>
+                        <h1 className="text-2xl font-medium">Edit Counselor Form</h1>
                     </div>
                     <div className="flex flex-row gap-3">
                         <RouteButton path="/counselor" title="Discard" className="bg-white text-black border shadow-sm" variant="outline" />
