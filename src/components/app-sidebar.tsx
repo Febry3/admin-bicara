@@ -82,9 +82,6 @@ export function AppSidebar() {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
-                {/* <SidebarFooter>
-                    <h1>gooter</h1>
-                </SidebarFooter> */}
             </SidebarContent>
         </Sidebar>
     )

@@ -54,7 +54,6 @@ class AdminUtilities {
 
     public async deleteAdmin(id: string): Promise<void> {
         try {
-
             await axiosClient.delete(`/admin/account/${id}`);
         } catch (err) {
             console.error(err);

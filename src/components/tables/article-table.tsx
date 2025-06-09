@@ -9,6 +9,9 @@ import {
 import Image from "next/image"
 import ArticleStatusBadge from "../article-status-badge"
 import TableAction from "../table-action"
+import BadgeDropDown from "../badge-dropdown"
+import { apiUrl } from "@/lib/axiosClient"
+import { ArticleAttribute } from "@/types/app-type"
 
 const articles = [
     {
@@ -56,7 +59,11 @@ const articles = [
 
 ]
 
-export default function ArticleTable() {
+export default async function ArticleTable() {
+    const response = await fetch(`${apiUrl}admin/article`);
+    const responseJson = await response.json();
+    const articles = responseJson.data as ArticleAttribute[];
+
     return (
         <Table>
             <TableHeader>
@@ -74,11 +81,11 @@ export default function ArticleTable() {
                     <TableRow key={index}>
                         <TableCell className="font-medium text-center">{index + 1}</TableCell>
                         <TableCell>{article.title}</TableCell>
-                        <TableCell>{article.body}</TableCell>
+                        <TableCell>{article.content}</TableCell>
                         <TableCell>
                             <div className="relative w-[250px] aspect-video">
                                 <Image
-                                    src={article.image}
+                                    src={article.image_url}
                                     alt="gambar"
                                     fill
                                     className="object-cover rounded-md"
@@ -86,7 +93,7 @@ export default function ArticleTable() {
                             </div>
                         </TableCell>
                         <TableCell className="ps-10">
-                            <ArticleStatusBadge status={article.status.toLowerCase()} />
+                            <BadgeDropDown id={article.article_id.toString()} status={article.status.toLowerCase()} />
                         </TableCell>
                         <TableCell className="text-center">
                             <TableAction edit="" del="" view="" role="" />

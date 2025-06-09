@@ -41,10 +41,19 @@ interface PaymentChartAttribute {
     totalTransactions: number
 }
 
+interface ArticleAttribute {
+    article_id: string,
+    title: string,
+    content: string,
+    image_url: string,
+    status: string,
+}
+
 export type {
     IDashboardCard,
     IPaymentCard,
     UserAttribute,
     TransactionAttribute,
-    PaymentChartAttribute
+    PaymentChartAttribute,
+    ArticleAttribute
 }
