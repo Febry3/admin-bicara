@@ -8,7 +8,6 @@ export default function ArticlePage() {
             <h1 className="text-2xl font-medium">Halaman Article</h1>
             <div className="w-full flex flex-row justify-between">
                 <SearchBox />
-                <Button className="bg-[var(--primary-color)] hover:bg-[var(--primary-color)]/70">Add Article</Button>
             </div>
             <div className="border-1 rounded-sm shadow-sm mt-3">
                 <ArticleTable />

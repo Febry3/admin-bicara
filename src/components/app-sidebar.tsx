@@ -1,6 +1,6 @@
 "use client"
 import { ArrowLeftRight, Home, Newspaper, UserRoundCog, Users } from "lucide-react"
-import { usePathname } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 
 import {
     Sidebar,
@@ -48,10 +48,15 @@ const menu = [
 export function AppSidebar() {
     const { state } = useSidebar();
     const pathname = usePathname();
+
+    function handleLogoClick() {
+        redirect("/");
+    }
+
     return (
         <Sidebar className={state === "expanded" ? "p-4" : ""} collapsible="icon">
             <SidebarHeader>
-                <Image src={"/admin-bicara.png"} alt="Logo" width={120} height={60} />
+                <Image className="hover:cursor-pointer" src={"/admin-bicara.png"} alt="Logo" width={120} height={60} onClick={handleLogoClick} />
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>

@@ -27,6 +27,7 @@ export default function RootLayout({
       <body
         className={`${poppinSans.className} antialiased`}
       >
+        <NextTopLoader color="#7D944D" showSpinner={false} />
         <SidebarProvider>
           <AppSidebar />
           <main className="w-full py-6 px-8">
@@ -35,7 +36,6 @@ export default function RootLayout({
               <AppBreadcrumb />
             </div>
             <div className="pt-3 w-full">
-              <NextTopLoader color="#7D944D" />
               {children}
             </div>
           </main>
