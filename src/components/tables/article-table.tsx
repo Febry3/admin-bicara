@@ -7,57 +7,10 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import Image from "next/image"
-import ArticleStatusBadge from "../article-status-badge"
 import TableAction from "../table-action"
 import BadgeDropDown from "../badge-dropdown"
 import { apiUrl } from "@/lib/axiosClient"
 import { ArticleAttribute } from "@/types/app-type"
-
-const articles = [
-    {
-        id: 123456,
-        title: "Kasep 1",
-        body: "This is a long text for post number 1.",
-        status: "Published",
-        image: "https://qzsrrlobwlisodbasdqi.supabase.co/storage/v1/object/public/profile//67e2bb8dce8f8_1742912397.jpg"
-    },
-    {
-        id: 123457,
-        title: "Kasep 2",
-        body: "This is a long text for post number 2.",
-        status: "Pending",
-        image: "https://qzsrrlobwlisodbasdqi.supabase.co/storage/v1/object/public/profile//67e2bb8dce8f8_1742912397.jpg"
-    },
-    {
-        id: 123458,
-        title: "Kasep 3",
-        body: "This is a long text for post number 3.",
-        status: "Rejected",
-        image: "https://qzsrrlobwlisodbasdqi.supabase.co/storage/v1/object/public/profile//67e2bb8dce8f8_1742912397.jpg"
-    },
-    {
-        id: 123459,
-        title: "Kasep 4",
-        body: "This is a long text for post number 4.",
-        status: "Published",
-        image: "https://qzsrrlobwlisodbasdqi.supabase.co/storage/v1/object/public/profile//67e2bb8dce8f8_1742912397.jpg"
-    },
-    {
-        id: 123460,
-        title: "Kasep 5",
-        body: "This is a long text for post number 5.",
-        status: "Pending",
-        image: "https://qzsrrlobwlisodbasdqi.supabase.co/storage/v1/object/public/profile//67e2bb8dce8f8_1742912397.jpg"
-    },
-    {
-        id: 123460,
-        title: "Kasep 5",
-        body: "This is a long text for post number 5.",
-        status: "Pending",
-        image: "https://qzsrrlobwlisodbasdqi.supabase.co/storage/v1/object/public/profile//67e2bb8dce8f8_1742912397.jpg"
-    },
-
-]
 
 export default async function ArticleTable() {
     const response = await fetch(`${apiUrl}admin/article`);

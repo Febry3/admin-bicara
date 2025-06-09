@@ -8,8 +8,10 @@ import { useState } from "react";
 export default function BadgeDropDown({ status, id }: { status: string, id: string }) {
     let [currStatus, setCurrStatus] = useState<string>(status);
     async function handleStatusUpdate(status: string) {
-        await articleUtilities.updateArticleStatus(id, status);
-        setCurrStatus(status);
+        if (status !== currStatus) {
+            await articleUtilities.updateArticleStatus(id, status);
+            setCurrStatus(status);
+        }
     }
     return (
         <DropdownMenu>
