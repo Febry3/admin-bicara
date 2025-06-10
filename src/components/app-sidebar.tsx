@@ -18,6 +18,7 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import DropDownProfile from "./dropdown-profile"
+import useUser from "@/hooks/use-user"
 
 const menu = [
     {
@@ -50,11 +51,12 @@ const menu = [
 export function AppSidebar() {
     const { state } = useSidebar();
     const pathname = usePathname();
+    const { user } = useUser();
 
     function handleLogoClick() {
         redirect("/");
     }
-
+    console.log(user?.name)
     return (
         <Sidebar className={state === "expanded" ? "p-4" : ""} collapsible="icon">
             <SidebarHeader>
@@ -104,7 +106,7 @@ export function AppSidebar() {
                                         className="object-cover rounded-md"
                                     />
                                 </div>
-                                <p className="ms-2 font-semibold text-sm">Aesepp</p>
+                                <p className="ms-2 font-semibold text-sm">{user?.name}</p>
                             </div>
                             <DropDownProfile />
                         </div> :

@@ -5,6 +5,7 @@ import ConsultationChart from "@/components/charts/consultation-chart";
 import UserChart from "@/components/charts/user-chart";
 import UserPieChart from "@/components/charts/user-piechart";
 import { randomInt } from "crypto";
+import useUser from "@/hooks/use-user";
 
 export default function Home() {
   const dashboardCardData = [
