@@ -1,9 +1,10 @@
 import { EllipsisVertical } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { redirect } from "next/navigation";
 
 export default function DropDownProfile() {
     async function handleLogout() {
-        console.log("asdasd")
+        redirect("/login");
     }
 
     return (
