@@ -4,7 +4,8 @@ import { createContext } from "react";
 export interface UserData {
     id: number,
     name: string,
-    email: string
+    email: string,
+    profile_url: string
 }
 
 export interface Credential {

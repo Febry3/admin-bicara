@@ -1,19 +1,17 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Credential, UserContext, UserData } from '../contexts/user-context';
-import axiosClient, { apiUrl, url } from '@/lib/axiosClient';
-
+import axiosClient, { url } from '@/lib/axiosClient';
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<UserData | null>(null);
 
     const fetchUser = async () => {
         try {
-            await axiosClient.get(`${url}/sanctum/csrf-cookie`);
-            const response = await axiosClient.get(`${apiUrl}verify-token`);
-            setUser(response.data);
+            const response = await axiosClient.get(`admin`);
+            setUser(response.data.data);
         } catch (error) {
             setUser(null);
         }
@@ -24,15 +22,15 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     async function login(credentials: Credential): Promise<AxiosResponse<any, any>> {
-        await axiosClient.get(`${url}/sanctum/csrf-cookie`);
-        const response = await axiosClient.post(`${apiUrl}login`, credentials);
+        await axios.get(`${url}/sanctum/csrf-cookie`);
+        const response = await axiosClient.post(`admin/login`, credentials);
         await fetchUser();
         return response;
     };
 
     const logout = async () => {
         try {
-            await axiosClient.post(`${apiUrl}logout`);
+            await axiosClient.post(`admin/logout`);
             setUser(null);
         } catch (error) {
             console.error("Logout failed:", error);

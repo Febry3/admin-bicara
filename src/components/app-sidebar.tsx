@@ -56,7 +56,8 @@ export function AppSidebar() {
     function handleLogoClick() {
         redirect("/");
     }
-    console.log(user?.name)
+
+    console.log(user)
     return (
         <Sidebar className={state === "expanded" ? "p-4" : ""} collapsible="icon">
             <SidebarHeader>
@@ -100,13 +101,13 @@ export function AppSidebar() {
                             <div className="flex flex-row items-center">
                                 <div className="relative w-[2.25rem] aspect-square border-1 rounded">
                                     <Image
-                                        src="/admin-bicara.png"
+                                        src={user!.profile_url}
                                         alt="gambar"
                                         fill
                                         className="object-cover rounded-md"
                                     />
                                 </div>
-                                <p className="ms-2 font-semibold text-sm">{user?.name}</p>
+                                <p className="ms-2 font-semibold text-sm">{user!.name}</p>
                             </div>
                             <DropDownProfile />
                         </div> :
