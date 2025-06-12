@@ -10,13 +10,13 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<UserData | null>(null);
 
     const fetchUser = async () => {
-        try {
-            const response = await axiosClient.get(`admin`);
-            setUser(response.data.data);
-        } catch (error) {
-            setUser(null);
-            // redirect("/login");
-        }
+        // try {
+        //     const response = await axiosClient.get(`admin`);
+        //     setUser(response.data.data);
+        // } catch (error) {
+        //     setUser(null);
+        //     // redirect("/login");
+        // }
     };
 
     useEffect(() => {
@@ -27,7 +27,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         // await axios.get(`${url}/sanctum/csrf-cookie`);
         const response = await axiosClient.post(`login`, credentials);
         console.log(response.data)
-        await fetchUser();
         return response;
     };
 

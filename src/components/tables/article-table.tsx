@@ -34,7 +34,7 @@ export default async function ArticleTable() {
                     <TableRow key={index}>
                         <TableCell className="font-medium text-center">{index + 1}</TableCell>
                         <TableCell>{article.title}</TableCell>
-                        <TableCell>{article.content}</TableCell>
+                        <TableCell className="truncate max-w-sm">{article.content}</TableCell>
                         <TableCell>
                             <div className="relative w-[250px] aspect-video">
                                 <Image

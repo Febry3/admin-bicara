@@ -12,6 +12,9 @@ export default function PaymentStatusBadge({ status }: { status: string }) {
         case "Failed":
             style = "border-red-400 bg-red-50 text-red-800";
             break;
+        case "Expired":
+            style = "border-blue-400 bg-blue-50 text-blue-800";
+            break;
         default:
             break;
     }
