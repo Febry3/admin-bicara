@@ -24,9 +24,10 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+
 interface ChartDataAttribute {
     date: string,
-    total: number
+    sumConsultations: number
 }
 
 const chartConfig = {
@@ -109,7 +110,7 @@ export default function ConsultationChart({ chartData }: { chartData: ChartDataA
                             content={
                                 <ChartTooltipContent
                                     className="w-[150px]"
-                                    nameKey="total"
+                                    nameKey="sumConsultations"
                                     labelFormatter={(value) => {
                                         return new Date(value).toLocaleDateString("en-US", {
                                             month: "short",
@@ -120,7 +121,7 @@ export default function ConsultationChart({ chartData }: { chartData: ChartDataA
                                 />
                             }
                         />
-                        <Bar dataKey="total" fill={chartConfig.sumConsultations.color} radius={5} />
+                        <Bar dataKey="sumConsultations" fill={chartConfig.sumConsultations.color} radius={5} />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
