@@ -128,7 +128,12 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export default function RevenueChart() {
+interface RevenueChartAttribute {
+    date: string,
+    revenue: number
+}
+
+export default function RevenueChart({ revenueData }: { revenueData: RevenueChartAttribute[] }) {
     const [timeRange, setTimeRange] = React.useState("30d")
 
     const filteredData = chartData.filter((item) => {

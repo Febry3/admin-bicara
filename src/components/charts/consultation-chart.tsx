@@ -117,6 +117,10 @@ const chartData = [
     { date: "2024-06-30", sumConsultations: 446 },
 ];
 
+interface ChartDataAttribute {
+    date: string,
+    sumConsultations: number
+}
 
 const chartConfig = {
     sumConsultations: {
@@ -125,7 +129,7 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export default function ConsultationChart() {
+export default function ConsultationChart({ chartData }: { chartData: ChartDataAttribute[] }) {
     const [timeRange, setTimeRange] = React.useState("30d")
 
     const filteredData = chartData.filter((item) => {

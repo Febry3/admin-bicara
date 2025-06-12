@@ -2,14 +2,15 @@
 
 import { EllipsisVertical } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import { redirect } from "next/navigation";
 import useUser from "@/hooks/use-user";
+import { useRouter } from "next/navigation";
 
 export default function DropDownProfile() {
     const { logout } = useUser();
+    const router = useRouter();
     async function handleLogout() {
         await logout();
-        redirect("/login");
+        router.push("/login");
     }
 
     return (

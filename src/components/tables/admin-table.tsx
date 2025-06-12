@@ -10,8 +10,12 @@ import {
 import TableAction from "../table-action"
 import { UserAttribute } from "@/types/app-type";
 import NoDataCell from "./no-data-cell";
+import { apiUrl } from "@/lib/axiosClient";
 
-export default function AdminTable({ admins }: { admins: UserAttribute[] }) {
+export default async function AdminTable() {
+    const response = await fetch(`${apiUrl}admin/account/counselor`, { method: 'GET' })
+    const responseJson = await response.json();
+    const admins = responseJson.data as UserAttribute[];
     return (
         <Table>
             <TableHeader>

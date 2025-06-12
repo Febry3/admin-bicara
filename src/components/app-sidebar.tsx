@@ -19,6 +19,7 @@ import Image from "next/image"
 import Link from "next/link"
 import DropDownProfile from "./dropdown-profile"
 import useUser from "@/hooks/use-user"
+import { useEffect } from "react"
 
 const menu = [
     {
@@ -57,7 +58,6 @@ export function AppSidebar() {
         redirect("/");
     }
 
-    console.log(user)
     return (
         <Sidebar className={state === "expanded" ? "p-4" : ""} collapsible="icon">
             <SidebarHeader>
@@ -101,13 +101,13 @@ export function AppSidebar() {
                             <div className="flex flex-row items-center">
                                 <div className="relative w-[2.25rem] aspect-square border-1 rounded">
                                     <Image
-                                        src={user!.profile_url}
+                                        src={user?.profile_url ?? "/admin-bicara.png"}
                                         alt="gambar"
                                         fill
                                         className="object-cover rounded-md"
                                     />
                                 </div>
-                                <p className="ms-2 font-semibold text-sm">{user!.name}</p>
+                                <p className="ms-2 font-semibold text-sm">{user?.name ?? "Loading"}</p>
                             </div>
                             <DropDownProfile />
                         </div> :

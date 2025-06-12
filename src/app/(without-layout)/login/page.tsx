@@ -3,23 +3,23 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import useUser from "@/hooks/use-user";
 import axiosClient, { apiUrl, url } from "@/lib/axiosClient";
 import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 
 export default function LoginPage() {
-    const { login } = useUser();
+
     const router = useRouter();
     async function handleLogin(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
 
         try {
-            await axiosClient.get(`${url}/sanctum/csrf-cookie`);
-
-            const response = await login({ email: formData.get("email")!.toString(), password: formData.get("password")!.toString() });
+            const response = await axiosClient.post("admin/login", {
+                email: formData.get("email"),
+                password: formData.get("password"),
+            });
 
             if (response.status === 200) {
                 router.push("/");

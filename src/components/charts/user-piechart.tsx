@@ -17,10 +17,12 @@ import {
     ChartTooltipContent,
 } from "@/components/ui/chart"
 
-const chartData = [
-    { gender: "Laki-laki", total: 4321, fill: "#3B82F6" },
-    { gender: "Perempuan", total: 1234, fill: "#EC4899" },
-]
+
+interface UserGenderAttribute {
+    maleCount: number,
+    femaleCount: number,
+    userCount: number
+}
 
 const chartConfig = {
     gender: {
@@ -33,8 +35,12 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export default function UserPieChart() {
-    const totalVisitors = 3000;
+export default function UserPieChart({ maleCount, femaleCount, userCount }: UserGenderAttribute) {
+    const chartData = [
+        { gender: "Laki-laki", total: maleCount, fill: "#3B82F6" },
+        { gender: "Perempuan", total: femaleCount, fill: "#EC4899" },
+    ]
+    const totalVisitors = userCount;
     return (
         <Card className="flex flex-col h-full">
             <CardHeader className="items-center pb-0">

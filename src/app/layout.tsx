@@ -25,10 +25,8 @@ export default function RootLayout({
       <body
         className={`${poppinSans.className} antialiased`}
       >
-        <UserProvider>
-          <NextTopLoader color="#7D944D" showSpinner={false} />
-          {children}
-        </UserProvider>
+        <NextTopLoader color="#7D944D" showSpinner={false} />
+        {children}
       </body>
     </html>
   );

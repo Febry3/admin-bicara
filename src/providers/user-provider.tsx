@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { Credential, UserContext, UserData } from '../contexts/user-context';
 import axiosClient, { url } from '@/lib/axiosClient';
+import { redirect } from 'next/navigation';
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<UserData | null>(null);
@@ -14,6 +15,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
             setUser(response.data.data);
         } catch (error) {
             setUser(null);
+            redirect("/login");
         }
     };
 

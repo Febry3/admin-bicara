@@ -15,19 +15,6 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-    { month: "January", male: 186, female: 80 },
-    { month: "February", male: 305, female: 200 },
-    { month: "March", male: 237, female: 120 },
-    { month: "April", male: 73, female: 190 },
-    { month: "May", male: 209, female: 130 },
-    { month: "June", male: 214, female: 140 },
-    { month: "July", male: 214, female: 140 },
-    { month: "August", male: 214, female: 140 },
-    { month: "October", male: 214, female: 140 },
-    { month: "November", male: 214, female: 140 },
-    { month: "December", male: 214, female: 140 },
-]
 
 const chartConfig = {
     male: {
@@ -40,7 +27,13 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export default function UserChart() {
+interface UserChartAttribute {
+    month: string,
+    male: number,
+    female: number
+}
+
+export default function UserChart({ userData }: { userData: UserChartAttribute[] }) {
     return (
         <Card className="h-full">
             <CardHeader>
@@ -51,7 +44,7 @@ export default function UserChart() {
                 <ChartContainer config={chartConfig} className="h-65 w-full">
                     <LineChart
                         accessibilityLayer
-                        data={chartData}
+                        data={userData}
                         margin={{
                             left: 12,
                             right: 12,
