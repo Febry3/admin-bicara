@@ -130,15 +130,15 @@ const chartConfig = {
 
 interface RevenueChartAttribute {
     date: string,
-    revenue: number
+    total: number
 }
 
 export default function RevenueChart({ revenueData }: { revenueData: RevenueChartAttribute[] }) {
     const [timeRange, setTimeRange] = React.useState("30d")
 
-    const filteredData = chartData.filter((item) => {
+    const filteredData = revenueData.filter((item) => {
         const date = new Date(item.date);
-        const referenceDate = new Date("2024-06-30");
+        const referenceDate = new Date(Date.now());
 
         let daysToSubtract = 30;
         if (timeRange === "7d") {
@@ -225,7 +225,7 @@ export default function RevenueChart({ revenueData }: { revenueData: RevenueChar
                             }
                         />
                         <Area
-                            dataKey="revenue"
+                            dataKey="total"
                             type="natural"
                             fill="url(#fillRevenue)"
                             stroke={chartConfig.revenue.color}

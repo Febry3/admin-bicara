@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const apiUrl = "http://localhost:8000/api/v1/";
-export const url = "http://localhost:8000";
+export const apiUrl = "https://temanbicara.web.id/api/v1/";
+export const url = "https://temanbicara.web.id";
 
 const axiosClient = axios.create({
     baseURL: apiUrl,
-    withCredentials: true,
+    withCredentials: false,
 });
 
 export default axiosClient;

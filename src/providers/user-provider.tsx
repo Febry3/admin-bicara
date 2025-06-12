@@ -15,7 +15,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
             setUser(response.data.data);
         } catch (error) {
             setUser(null);
-            redirect("/login");
+            // redirect("/login");
         }
     };
 
@@ -24,8 +24,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     async function login(credentials: Credential): Promise<AxiosResponse<any, any>> {
-        await axios.get(`${url}/sanctum/csrf-cookie`);
-        const response = await axiosClient.post(`admin/login`, credentials);
+        // await axios.get(`${url}/sanctum/csrf-cookie`);
+        const response = await axiosClient.post(`login`, credentials);
+        console.log(response.data)
         await fetchUser();
         return response;
     };
